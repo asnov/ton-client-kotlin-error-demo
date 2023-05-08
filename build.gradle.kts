@@ -24,6 +24,7 @@ dependencies {
 
     // Everscale support https://github.com/mdorofeev/ton-client-kotlin
     implementation("ee.nx-01.tonclient:ton-client-kotlin:0.0.62")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
 }
 
 tasks.test {

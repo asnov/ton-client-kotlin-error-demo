@@ -9,21 +9,25 @@ import ee.nx01.tonclient.abi.Signer
 import ee.nx01.tonclient.net.AccountType
 import ee.nx01.tonclient.types.AccountFilterInput
 import ee.nx01.tonclient.types.StringFilterInput
+import kotlinx.coroutines.runBlocking
 import java.math.BigDecimal
 
 object TestConstants {
-    val WALLET_ADDRESS = "0:7f458ae01e28573a181e2227dc77710d6421d4e103fdd3e023200aa4bce83950"
-    val CONFIG = TonClientConfig(NetworkConfig(endpoints = listOf("https://devnet.evercloud.dev/00ce8109d59745d9b0ee5207f1ebb46b/graphql")))
-    val CONFIG_MAIN = TonClientConfig(NetworkConfig(endpoints = listOf("https://mainnet.evercloud.dev/00ce8109d59745d9b0ee5207f1ebb46b/graphql")))
+    const val WALLET_ADDRESS = "0:7f458ae01e28573a181e2227dc77710d6421d4e103fdd3e023200aa4bce83950"
+    val CONFIG =
+        TonClientConfig(NetworkConfig(endpoints = listOf("https://devnet.evercloud.dev/00ce8109d59745d9b0ee5207f1ebb46b/graphql")))
+    val CONFIG_MAIN =
+        TonClientConfig(NetworkConfig(endpoints = listOf("https://mainnet.evercloud.dev/00ce8109d59745d9b0ee5207f1ebb46b/graphql")))
 }
 
 suspend fun main() {
     val client = TonClient()
 
-    abiTest(client) // This works
-
-//    tonClientTest(client)   // This doesn't work
-    accountTest()           // This doesn't work as well
+    runBlocking {
+        abiTest(client) // This works
+        tonClientTest(client)   // This doesn't work
+        accountTest()           // This doesn't work as well
+    }
 
     client.destroy()
     println(">> El fin.")
